@@ -183,6 +183,7 @@ class DCM_Master {
 		$this->cargador->add_action( 'admin_menu', $this->dcm_admin, 'add_menu' );
 		$this->cargador->add_action( 'wp_ajax_category_select_action', $this->ajax, 'peticiones' );
 		$this->cargador->add_action( 'wp_ajax_guardarmaestro', $this->ajax, 'guardar' );
+		$this->cargador->add_action( 'wp_ajax_llenagridmaestro', $this->ajax, 'llenargridmaestros' );
     }
     
     /**

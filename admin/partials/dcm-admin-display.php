@@ -12,8 +12,26 @@
   * @subpackage dcmplugin/admin/parcials
   */
 /* Este archivo debe consistir principalmente en HTML con un poco de PHP. */
+
 ?><head><article>
 <p>Configuracion de Maestros</p>
+<!– combo maestros — >
+<div class="consultadegrupo col-sm-12">
+			<div id="user_div" class="col-sm-6 margindiv10"><?php 
+			$terms = get_users( 'orderby=nicename&role=Maestro' );
+			//$terms = new WP_User_Query( array( 'role' => 'Administrator' ) );
+			$datosparent="";
+			
+			echo '<select id="teacherusers" name="teachers">';
+			// Get categories as array  
+			 echo '<option disabled selected value> -- Seleccione Maestro -- </option>';
+			foreach ( $terms as $term ) :
+				echo '<option value="' . $term->ID . '">' . $term->display_name . '</option>';
+				
+			endforeach;
+			echo '</select>';
+?></div>
+
 <div class="consultadegrupo col-sm-12">
 			<div id="parent_cat_div" class="col-sm-6 margindiv10"><?php 
 			$terms=get_terms('grupos',
@@ -37,23 +55,9 @@
 
 		<div id="sub_grupo_div"  class="col-sm-6 margindiv10"><select class="ddlgrupo" name="sub_grupo_disabled" id="parent_grupo" disabled="disabled"><option>Seleccione grupo!</option></select></div>
 		<br/>
-		<div class="consultadegrupo col-sm-6">
-			<div id="user_div" class="col-sm-6 margindiv10"><?php 
-			$terms = get_users( 'orderby=nicename&role=Maestro' );
-			//$terms = new WP_User_Query( array( 'role' => 'Administrator' ) );
-			$datosparent="";
-			
-			echo '<select id="teacherusers" name="teachers">';
-			// Get categories as array  
-			 echo '<option disabled selected value> -- Seleccione Maestro -- </option>';
-			foreach ( $terms as $term ) :
-				echo '<option value="' . $term->ID . '">' . $term->display_name . '</option>';
-				
-			endforeach;
-			echo '</select>';
-		 ?></div>
 		
-		<div>
+		
+		<div id="tblmaestros"  >
 			<table class="table-responsive">
 				<thead>
 					<tr>
@@ -78,5 +82,6 @@
 		</div>
 		<div class="resultadoguardado" id="guardadomensaje"></div>
 		<div><button type='button' class='btn btn-primary col-sm-6 margindiv10 btnsavemaestro' >Guardar</button><div>
+		
 </article></head>
 

@@ -27,6 +27,26 @@
 				})
 			});
 
+    			jQuery('#teacherusers').change(function(){
+				var idmaestro=jQuery('#teacherusers').val();				
+				// call ajax
+				
+				jQuery.ajax({
+					url:miobjeto.url,
+					type:'POST',
+					data:{
+						action:'llenagridmaestro',
+						maestroid:idmaestro,
+						nonce:miobjeto.seguridad
+					},
+					success:function(results)
+					{
+						jQuery('#tblmaestros').html(results);
+					}
+				})
+			});
+
+
 			//segundo drop down
 			jQuery('#sub_cat_div').on('change','#parent_grado',function(){
 			var parentCat=jQuery('#parent_grado').val();
@@ -46,9 +66,14 @@
 				})
 			});
 
+
 		
 			jQuery('.btnsavemaestro').click(function(){
 				var gradoescuela=jQuery('#parent_grupo').val();
+				
+				if (jQuery('#parent_grupo').val() == null) //obtiene  el grado cuando el grupo no  es requerido por ejemplo la secundaria
+					gradoescuela=jQuery('#parent_grado').val();
+
 				var maestro=jQuery('#teacherusers').val();
 				jQuery.ajax({
 				url:miobjeto.url,
@@ -60,7 +85,7 @@
 				success:function(results)
 					{
 						console.log(results);
-						jQuery('#guardadomensaje').html(results);
+						jQuery('#tblmaestros').html(results);
 					}
 			})
 			});
